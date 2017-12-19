@@ -3,6 +3,7 @@ var mysql      = require('mysql');
 var bodyParser = require('body-parser');
 var fs = require('fs');
 var http = require('http');
+var https = require('https');
 var path = require('path');
 
 //Database connection config
