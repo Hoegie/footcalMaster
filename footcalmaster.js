@@ -1,16 +1,15 @@
-//version 1
 var express    = require('express');
 var mysql      = require('mysql');
 var bodyParser = require('body-parser');
 var fs = require('fs');
 var http = require('http');
-var https = require('https');
 var path = require('path');
 
 //Database connection config
 //*************************************************************************
 var connection = mysql.createConnection({
-  host     : '127.0.0.1',
+  host     : 'degronckel.synology.me', 
+  //host     : '192.168.25.7',
   user     : 'root',
   password : 'Hoegaarden',
   database : 'FootCal_master'
@@ -43,7 +42,7 @@ connection.query('SELECT * from clubs', function(err, rows, fields) {
 });
 
 app.get("/clubs/active",function(req,res){
-connection.query('SELECT club_ID, club_name, password, api_url from clubs WHERE active = 0 ORDER BY club_name ASC', function(err, rows, fields) {
+connection.query('SELECT * from clubs WHERE active = 1 ORDER BY club_name ASC', function(err, rows, fields) {
 /*connection.end();*/
   if (!err){
     console.log('The solution is: ', rows);
@@ -53,6 +52,33 @@ connection.query('SELECT club_ID, club_name, password, api_url from clubs WHERE 
   }
   });
 });
+
+app.get("/clubs/favorites/:favorites",function(req,res){
+var connquery ="SELECT * from clubs WHERE club_ID in " + req.params.favorites + " ORDER BY club_name ASC"
+connection.query(connquery, function(err, rows, fields) {
+/*connection.end();*/
+  if (!err){
+    console.log('The solution is: ', rows);
+    res.end(JSON.stringify(rows));
+  }else{
+    console.log('Error while performing Query.');
+  }
+  });
+});
+
+app.get("/clubs/nonfavorites/:favorites",function(req,res){
+var connquery ="SELECT * from clubs WHERE club_ID NOT in " + req.params.favorites + " ORDER BY club_name ASC"
+connection.query(connquery, function(err, rows, fields) {
+/*connection.end();*/
+  if (!err){
+    console.log('The solution is: ', rows);
+    res.end(JSON.stringify(rows));
+  }else{
+    console.log('Error while performing Query.');
+  }
+  });
+});
+
 
 app.post("/clubs/new",function(req,res){
   var post = {
@@ -133,6 +159,7 @@ http.createServer(app).listen(app.get('port'), function(){
 
 /*HTTP server setup*/
 //*************************************************************************
+/*
 https.createServer({
             key: fs.readFileSync("/etc/letsencrypt/live/footcal.be/privkey.pem"),
             cert: fs.readFileSync("/etc/letsencrypt/live/footcal.be/fullchain.pem"),
@@ -140,4 +167,5 @@ https.createServer({
      }, app).listen(app.get('porthttps'), function(){
   console.log("Express SSL server listening on port " + app.get('porthttps'));
 });
+*/
 //*************************************************************************
