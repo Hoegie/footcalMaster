@@ -8,8 +8,7 @@ var path = require('path');
 //Database connection config
 //*************************************************************************
 var connection = mysql.createConnection({
-  host     : 'degronckel.synology.me', 
-  //host     : '192.168.25.7',
+  host     : '127.0.0.1',
   user     : 'root',
   password : 'Hoegaarden',
   database : 'FootCal_master'
