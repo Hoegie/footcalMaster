@@ -3,6 +3,7 @@ var mysql      = require('mysql');
 var bodyParser = require('body-parser');
 var fs = require('fs');
 var http = require('http');
+var https = require('https');
 var path = require('path');
 
 //Database connection config
@@ -68,6 +69,19 @@ connection.query(connquery, function(err, rows, fields) {
 app.get("/clubs/nonfavorites/:favorites",function(req,res){
 var connquery ="SELECT * from clubs WHERE club_ID NOT in " + req.params.favorites + " ORDER BY club_name ASC"
 connection.query(connquery, function(err, rows, fields) {
+/*connection.end();*/
+  if (!err){
+    console.log('The solution is: ', rows);
+    res.end(JSON.stringify(rows));
+  }else{
+    console.log('Error while performing Query.');
+  }
+  });
+});
+
+
+app.get("/club/api/:clubid",function(req,res){
+connection.query('SELECT CONCAT(server_address, ":", api_port) as api, server_address FROM clubs WHERE club_ID = ?', req.params.clubid ,function(err, rows, fields) {
 /*connection.end();*/
   if (!err){
     console.log('The solution is: ', rows);
@@ -158,7 +172,7 @@ http.createServer(app).listen(app.get('port'), function(){
 
 /*HTTP server setup*/
 //*************************************************************************
-/*
+
 https.createServer({
             key: fs.readFileSync("/etc/letsencrypt/live/footcal.be/privkey.pem"),
             cert: fs.readFileSync("/etc/letsencrypt/live/footcal.be/fullchain.pem"),
@@ -166,5 +180,5 @@ https.createServer({
      }, app).listen(app.get('porthttps'), function(){
   console.log("Express SSL server listening on port " + app.get('porthttps'));
 });
-*/
+
 //*************************************************************************
