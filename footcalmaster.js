@@ -177,11 +177,11 @@ connection.query('DELETE FROM clubs WHERE club_ID = ?', data.teamid, function(er
 
 /*HTTP server setup*/
 //*************************************************************************
-/*
+
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
 });
-*/
+
 //*************************************************************************
 
 /*HTTP server setup*/
