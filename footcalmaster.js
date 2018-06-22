@@ -92,6 +92,17 @@ connection.query('SELECT CONCAT(server_address, ":", api_port) as api, server_ad
   });
 });
 
+app.get("/club/password/:clubid",function(req,res){
+connection.query('SELECT password, passprotect FROM clubs WHERE club_ID = ?', req.params.clubid ,function(err, rows, fields) {
+/*connection.end();*/
+  if (!err){
+    console.log('The solution is: ', rows);
+    res.end(JSON.stringify(rows));
+  }else{
+    console.log('Error while performing Query.');
+  }
+  });
+});
 
 app.post("/clubs/new",function(req,res){
   var post = {
@@ -132,7 +143,8 @@ connection.query('UPDATE clubs SET ? WHERE club_ID = ?',[put, req.params.clubid]
 
 app.put("/clubs/password/:clubid",function(req,res){
   var put = {
-        password: req.body.password
+        password: req.body.password,
+        passprotect: req.body.passprotect
     };
     console.log(put);
 connection.query('UPDATE clubs SET ? WHERE club_ID = ?',[put, req.params.clubid], function(err,result) {
@@ -165,9 +177,11 @@ connection.query('DELETE FROM clubs WHERE club_ID = ?', data.teamid, function(er
 
 /*HTTP server setup*/
 //*************************************************************************
+/*
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
 });
+*/
 //*************************************************************************
 
 /*HTTP server setup*/
