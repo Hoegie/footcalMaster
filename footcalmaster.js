@@ -53,6 +53,18 @@ connection.query('SELECT * from clubs WHERE active = 1 ORDER BY club_name ASC', 
   });
 });
 
+app.get("/clubs/notcurrent/:clubid",function(req,res){
+connection.query('SELECT * from clubs where club_ID <> ?',req.params.clubid, function(err, rows, fields) {
+/*connection.end();*/
+  if (!err){
+    console.log('The solution is: ', rows);
+    res.end(JSON.stringify(rows));
+  }else{
+    console.log('Error while performing Query.');
+  }
+  });
+});
+
 app.get("/clubs/favorites/:favorites",function(req,res){
 var connquery ="SELECT * from clubs WHERE club_ID in " + req.params.favorites + " ORDER BY club_name ASC"
 connection.query(connquery, function(err, rows, fields) {
