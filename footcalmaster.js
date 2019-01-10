@@ -198,7 +198,7 @@ http.createServer(app).listen(app.get('port'), function(){
 
 /*HTTP server setup*/
 //*************************************************************************
-/*
+
 https.createServer({
             key: fs.readFileSync("/etc/letsencrypt/live/footcal.be/privkey.pem"),
             cert: fs.readFileSync("/etc/letsencrypt/live/footcal.be/fullchain.pem"),
@@ -206,5 +206,5 @@ https.createServer({
      }, app).listen(app.get('porthttps'), function(){
   console.log("Express SSL server listening on port " + app.get('porthttps'));
 });
-*/
+
 //*************************************************************************
