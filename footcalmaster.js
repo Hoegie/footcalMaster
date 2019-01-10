@@ -101,6 +101,7 @@ connection.query('SELECT CONCAT(server_address, ":", api_port) as api, server_ad
     res.end(JSON.stringify(rows));
   }else{
     console.log('Error while performing Query.');
+    console.log(err);
   }
   });
 });
