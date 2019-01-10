@@ -1,15 +1,16 @@
+//version 4.1 (level included)
 var express    = require('express');
 var mysql      = require('mysql');
 var bodyParser = require('body-parser');
 var fs = require('fs');
 var http = require('http');
-var https = require('https');
 var path = require('path');
 
 //Database connection config
 //*************************************************************************
 var connection = mysql.createConnection({
-  host     : '127.0.0.1',
+  host     : 'degronckel.synology.me', 
+  //host     : '192.168.25.7',
   user     : 'root',
   password : 'Hoegaarden',
   database : 'FootCal_master'
@@ -93,7 +94,7 @@ connection.query(connquery, function(err, rows, fields) {
 
 
 app.get("/club/api/:clubid",function(req,res){
-connection.query('SELECT CONCAT(server_address, ":", api_port) as api, server_address FROM clubs WHERE club_ID = ?', req.params.clubid ,function(err, rows, fields) {
+connection.query('SELECT CONCAT(server_address, ":", api_port) as api, server_address, level FROM clubs WHERE club_ID = ?', req.params.clubid ,function(err, rows, fields) {
 /*connection.end();*/
   if (!err){
     console.log('The solution is: ', rows);
@@ -189,16 +190,14 @@ connection.query('DELETE FROM clubs WHERE club_ID = ?', data.teamid, function(er
 
 /*HTTP server setup*/
 //*************************************************************************
-
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
 });
-
 //*************************************************************************
 
 /*HTTP server setup*/
 //*************************************************************************
-
+/*
 https.createServer({
             key: fs.readFileSync("/etc/letsencrypt/live/footcal.be/privkey.pem"),
             cert: fs.readFileSync("/etc/letsencrypt/live/footcal.be/fullchain.pem"),
@@ -206,5 +205,5 @@ https.createServer({
      }, app).listen(app.get('porthttps'), function(){
   console.log("Express SSL server listening on port " + app.get('porthttps'));
 });
-
+*/
 //*************************************************************************
