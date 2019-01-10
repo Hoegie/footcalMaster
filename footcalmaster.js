@@ -9,7 +9,7 @@ var path = require('path');
 //Database connection config
 //*************************************************************************
 var connection = mysql.createConnection({
-  host     : 'degronckel.synology.me', 
+  host     : '127.0.0.1', 
   //host     : '192.168.25.7',
   user     : 'root',
   password : 'Hoegaarden',
