@@ -139,14 +139,16 @@ connection.query('INSERT INTO clubs SET ?', post, function(err,result) {
 
 
 app.put("/clubs/:clubid",function(req,res){
+  /*
   var put = {
         club_name: req.body.clubname,
         password: req.body.password,
         api_url: req.body.apiurl,
         active: req.body.active
     };
-    console.log(put);
-connection.query('UPDATE clubs SET ? WHERE club_ID = ?',[put, req.params.clubid], function(err,result) {
+    */
+    console.log(req.body);
+connection.query('UPDATE clubs SET ? WHERE club_ID = ?',[req.body, req.params.clubid], function(err,result) {
   if (!err){
     console.log(result);
     res.end(JSON.stringify(result.changedRows));
