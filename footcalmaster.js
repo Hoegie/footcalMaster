@@ -200,7 +200,7 @@ app.post("/commands/createdb",function(req,res){
   console.log("Creating new DB ...");
   var dbname = req.body.dbname;
 
-  exec("sh /app/nodeprojects/github/scipts/createdb.sh " + dbname, function(error, stdout, stderr) {
+  exec("sh /app/nodeprojects/github/footcalMaster/createdb.sh " + dbname, function(error, stdout, stderr) {
                     // Log success in some manner
     if (error !== null) {
       console.log(error);
