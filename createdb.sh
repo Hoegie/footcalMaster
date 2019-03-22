@@ -8,6 +8,8 @@ echo $createcommand >> /app/nodeprojects/github/logs/newClubAccount.log 2>&1
 mysql -h localhost -u root -pHoegaarden << EOF
 use mysql;
 $createcommand
+use $dbname;
+source /app/nodeprojects/github/templates/FootCal_template.sql;
 EOF
 
 
