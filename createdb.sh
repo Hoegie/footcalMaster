@@ -1,3 +1,4 @@
+#!/bin/sh
 dbname=FootCal_$1
 createcommand="\"CREATE DATABASE $dbname;\""
 date >> /app/nodeprojects/github/logs/newClubAccount.log 2>&1
