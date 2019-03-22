@@ -192,6 +192,29 @@ connection.query('DELETE FROM clubs WHERE club_ID = ?', data.teamid, function(er
 //************************************************************************************************************************************************************************
 
 
+/*COMMAND SCRIPT API's*/
+
+app.post("/commands/createdb",function(req,res){
+  //res.end(JSON.stringify("webhook successfull"));
+  console.log("Creating new DB ...");
+  var dbname = req.body.dbname;
+
+  exec("sh /app/nodeprojects/github/scipts/createdb.sh" + dbname, function(error, stdout, stderr) {
+                    // Log success in some manner
+    if (error !== null) {
+      console.log(error);
+      res.end(JSON.stringify("error"));
+
+    } else {
+    console.log('stdout: ' + stdout);
+    console.log('stderr: ' + stderr);
+    res.end(JSON.stringify("success"));
+    }                  
+  });
+});
+
+
+
 /*HTTP server setup*/
 //*************************************************************************
 http.createServer(app).listen(app.get('port'), function(){
