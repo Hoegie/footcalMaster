@@ -6,6 +6,7 @@ var fs = require('fs');
 var http = require('http');
 var https = require('https');
 var path = require('path');
+var exec = require('child_process').exec;
 
 //Database connection config
 //*************************************************************************
