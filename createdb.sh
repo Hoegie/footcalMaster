@@ -5,5 +5,5 @@ date >> /app/nodeprojects/github/logs/newClubAccount.log 2>&1
 echo $createcommand >> /app/nodeprojects/github/logs/newClubAccount.log 2>&1 
 /app/nodeprojects/github/footcalMaster/mysql -h localhost -uroot -pHoegaarden -Bse $createcommand
 #>> /app/nodeprojects/github/logs/newClubAccount.log 2>&1
-#test
+
 
