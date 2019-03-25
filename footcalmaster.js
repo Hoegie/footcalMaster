@@ -214,6 +214,31 @@ app.post("/commands/createdb",function(req,res){
   });
 });
 
+app.post("/commands/createapi",function(req,res){
+  //res.end(JSON.stringify("webhook successfull"));
+  console.log("Creating new API ...");
+
+var clubid = req.body.clubid;
+var clubname = req.body.clubname;
+var clubbasenr = req.body.clubbasenr;
+var dbname = req.body.dbname;
+var serverdir = req.body.serverdir;
+var apiport = req.body.apiport;
+
+
+  exec("sh /app/nodeprojects/github/footcalMaster/apisetup.sh " + clubid + " " + clubname + " " + clubbasenr + " " + dbname + " " + serverdir + " " + apiport, function(error, stdout, stderr) {
+                    // Log success in some manner
+    if (error !== null) {
+      console.log(error);
+      res.end(JSON.stringify("error"));
+
+    } else {
+    console.log('stdout: ' + stdout);
+    console.log('stderr: ' + stderr);
+    res.end(JSON.stringify("success"));
+    }                  
+  });
+});
 
 
 /*HTTP server setup*/
