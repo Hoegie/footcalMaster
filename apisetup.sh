@@ -22,7 +22,7 @@ sed -i -e "s/APIstring/$apiport/g" /app/nodeprojects/github/$serverdir/footcalin
 #copy footcalini.js to ini backup dir
 cp /app/nodeprojects/github/$serverdir/footcalini.js /app/nodeprojects/github/templates/inibackup/footcalini_$serverdir.js
 #adapt master webhook script
-sed -i "\$a cp /app/nodeprojects/github/templates/FootCalTemplate/footcal.js /app/nodeprojects/github/$serverdir >> /app/nodeprojects/github/logs/master_webhook.log 2>&1" /app/nodeprojects/github/m$
+sed -i "\$a cp /app/nodeprojects/github/templates/FootCalTemplate/footcal.js /app/nodeprojects/github/$serverdir >> /app/nodeprojects/github/logs/master_webhook.log 2>&1" /app/nodeprojects/github/masterWebHook/master_wh_script.sh
 #create php directories for gamereports & images
 mkdir /var/www/footcal.be/public_html/$serverdir
 mkdir /var/www/footcal.be/public_html/$serverdir/gamereports
@@ -30,7 +30,7 @@ mkdir /var/www/footcal.be/public_html/$serverdir/images
 mkdir /var/www/footcal.be/public_html/$serverdir/images/players
 mkdir /var/www/footcal.be/public_html/$serverdir/images/staff
 #update backupscript to take backup of the new database
-sed -i "\$a dump_database \"FootCal_$dbname\" \"$dbname\" \"mysqldump --user=\$mysql_user -p --host=localhost --databases FootCal_$dbname > /home/sven/dumps/\"" /home/sven/backupscript/sqldump.exp
+sed -i "\$a dump_database \"FootCal_$4\" \"$4\" \"mysqldump --user=\$mysql_user -p --host=localhost --databases FootCal_$4 > /home/sven/dumps/\"" /home/sven/backupscript/sqldump.exp
 #activate the API with PM2
 #sleep 10
 #pm2 start /app/nodeprojects/github/$serverdir/footcal$serverdir.js --watch
