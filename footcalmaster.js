@@ -226,7 +226,7 @@ var serverdir = req.body.serverdir;
 var apiport = req.body.apiport;
 
 console.log(clubid);
-  /*
+  
   exec("sh /app/nodeprojects/github/footcalMaster/apisetup.sh " + clubid + " " + clubname + " " + clubbasenr + " " + dbname + " " + serverdir + " " + apiport, function(error, stdout, stderr) {
                     // Log success in some manner
     if (error !== null) {
@@ -239,7 +239,7 @@ console.log(clubid);
     res.end(JSON.stringify('success'));
     }                  
   });
-  */
+  
 });
 
 /*HTTP server setup*/
