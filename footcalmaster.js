@@ -274,8 +274,8 @@ pm2.connect(function(err){
     console.log("connected");
     
     pm2.list((err, processDescriptionList) => {
-        console.log(processDescriptionList.pm_id);
-        res.end(JSON.stringify(processDescriptionList.pm_id));
+        console.log(processDescriptionList[0].pm_id);
+        res.end(JSON.stringify(processDescriptionList[0].pm_id));
         pm2.disconnect();
     });
   } 
