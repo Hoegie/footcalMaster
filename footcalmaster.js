@@ -249,8 +249,6 @@ app.get("/commands/testrun/:clubname",function(req,res){
 
 var clubname = '"' + req.params.clubname + '"';
 
-
-console.log(clubid);
   
   exec("sh /app/nodeprojects/github/test.sh " + clubname, function(error, stdout, stderr) {
                     // Log success in some manner
