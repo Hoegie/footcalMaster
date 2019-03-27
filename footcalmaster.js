@@ -7,6 +7,7 @@ var http = require('http');
 var https = require('https');
 var path = require('path');
 var exec = require('child_process').exec;
+var pm2 = require('pm2');
 
 //Database connection config
 //*************************************************************************
@@ -257,6 +258,29 @@ var clubname = '"' + req.params.clubname + '"';
     }                  
   });
   
+});
+
+
+/*PM2 API*/
+
+app.get("/pm2/list/all",function(req,res){
+
+pm2.connect(function(err){
+  if (err) {
+    console.log(err);
+
+  } else {
+
+    pm2.list(function(errback){
+
+        console.log(errback);
+        res.end(JSON.stringify(errback));
+        pm2.disconnect();
+    });
+  } 
+
+});
+
 });
 
 /*HTTP server setup*/
