@@ -271,9 +271,11 @@ pm2.connect(function(err){
 
   } else {
 
-    pm2.list((errback) => {
-        console.log(errback);
-        res.end(JSON.stringify(errback));
+    console.log("connected");
+    
+    pm2.list((err, processDescriptionList) => {
+        console.log(processDescriptionList);
+        res.end(JSON.stringify(processDescriptionList));
         pm2.disconnect();
     });
   } 
