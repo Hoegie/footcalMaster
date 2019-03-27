@@ -140,14 +140,7 @@ connection.query('INSERT INTO clubs SET ?', post, function(err,result) {
 
 
 app.put("/clubs/:clubid",function(req,res){
-  /*
-  var put = {
-        club_name: req.body.clubname,
-        password: req.body.password,
-        api_url: req.body.apiurl,
-        active: req.body.active
-    };
-    */
+  
     console.log(req.body);
 connection.query('UPDATE clubs SET ? WHERE club_ID = ?',[req.body, req.params.clubid], function(err,result) {
   if (!err){
@@ -219,15 +212,16 @@ app.post("/commands/createapi",function(req,res){
   console.log("Creating new API ...");
 
 var clubid = req.body.clubid;
-var clubname = req.body.clubname;
+var clubname = '"' + req.body.clubname + '"';
+var clubbasenr = req.body.clubbasenr;
 var clubbasenr = req.body.clubbasenr;
 var dbname = req.body.dbname;
 var serverdir = req.body.serverdir;
 var apiport = req.body.apiport;
 
-console.log(clubid);
+
   
-  exec("sh /app/nodeprojects/github/footcalMaster/apisetup.sh " + clubid + " " + clubname + " " + clubbasenr + " " + dbname + " " + serverdir + " " + apiport, function(error, stdout, stderr) {
+  exec('sh /app/nodeprojects/github/footcalMaster/apisetup.sh ' + clubid + ' ' + clubname + ' ' + clubbasenr + ' ' + dbname + ' ' + serverdir + ' '  + apiport, function(error, stdout, stderr) {
                     // Log success in some manner
     if (error !== null) {
       console.log(error);
