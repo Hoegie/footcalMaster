@@ -271,8 +271,7 @@ pm2.connect(function(err){
 
   } else {
 
-    pm2.list(function(errback){
-
+    pm2.list((errback) => {
         console.log(errback);
         res.end(JSON.stringify(errback));
         pm2.disconnect();
