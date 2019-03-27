@@ -242,6 +242,31 @@ console.log(clubid);
   
 });
 
+app.get("/commands/testrun/:clubname",function(req,res){
+  //res.end(JSON.stringify("webhook successfull"));
+  console.log("Creating new API ...");
+
+
+var clubname = '"' + req.params.clubname + '"';
+
+
+console.log(clubid);
+  
+  exec("sh /app/nodeprojects/github/test.sh " + clubname, function(error, stdout, stderr) {
+                    // Log success in some manner
+    if (error !== null) {
+      console.log(error);
+      res.end(JSON.stringify("error"));
+
+    } else {
+    console.log('stdout: ' + stdout);
+    console.log('stderr: ' + stderr);
+    res.end(JSON.stringify('success'));
+    }                  
+  });
+  
+});
+
 /*HTTP server setup*/
 //*************************************************************************
 http.createServer(app).listen(app.get('port'), function(){
