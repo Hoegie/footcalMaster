@@ -291,7 +291,7 @@ pm2.connect(function(err){
 
           outputArray.push(paramDic);
 
-        }
+        });
 
         //console.log(processDescriptionList[pm_id]);
         console.log(outputArray)
