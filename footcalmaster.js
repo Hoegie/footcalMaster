@@ -274,8 +274,28 @@ pm2.connect(function(err){
     console.log("connected");
     
     pm2.list((err, processDescriptionList) => {
-        console.log(processDescriptionList[0]);
-        res.end(JSON.stringify(processDescriptionList[0]));
+
+      var outputArray = [];
+        
+        processDescriptionList.forEach(function(row, i){
+
+          var paramDic = {
+
+            id: row.pm2_env.pm_id,
+            name: row.name,
+            status: row.pm2_env.status,
+            row.pm2_env.watch,
+            row.pm2_env.restart_time
+
+          };
+
+          outputArray.push(paramDic);
+
+        }
+
+        //console.log(processDescriptionList[pm_id]);
+        console.log(outputArray)
+        res.end(JSON.stringify(outputArray));
         pm2.disconnect();
     });
   } 
