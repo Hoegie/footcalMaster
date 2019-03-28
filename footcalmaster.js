@@ -284,8 +284,8 @@ pm2.connect(function(err){
             id: row.pm2_env.pm_id,
             name: row.name,
             status: row.pm2_env.status,
-            row.pm2_env.watch,
-            row.pm2_env.restart_time
+            watch: row.pm2_env.watch,
+            restart: row.pm2_env.restart_time
 
           };
 
