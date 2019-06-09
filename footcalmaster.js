@@ -122,16 +122,16 @@ connection.query('SELECT password, passprotect FROM clubs WHERE club_ID = ?', re
 });
 
 app.post("/clubs/new",function(req,res){
-  var post = {
-        club_name: req.body.clubname,
-        password: req.body.password,
-        api_url: req.body.apiurl
-    };
-    console.log(post);
-connection.query('INSERT INTO clubs SET ?', post, function(err,result) {
+connection.query('INSERT INTO clubs SET ?', req.body, function(err,result) {
 /*connection.end();*/
   if (!err){
     console.log(result);
+
+    //Call the correct api using the server_address.  The result.insertId will be used as the clubID parameter.
+    var clubID = result.insertId;
+    console.log(clubID);
+
+
     res.end(JSON.stringify(result.insertId));
   }else{
     console.log('Error while performing Query.');
