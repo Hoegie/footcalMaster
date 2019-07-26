@@ -222,7 +222,7 @@ var apiport = req.body.apiport;
 
 
   
-  exec('sh /app/nodeprojects/github/footcalMaster/apisetup.sh ' + clubid + ' ' + clubname + ' ' + clubbasenr + ' ' + dbname + ' ' + serverdir + ' '  + apiport, function(error, stdout, stderr) {
+  exec('bash /app/nodeprojects/github/footcalMaster/apisetup.sh ' + clubid + ' ' + clubname + ' ' + clubbasenr + ' ' + dbname + ' ' + serverdir + ' '  + apiport, function(error, stdout, stderr) {
                     // Log success in some manner
     if (error !== null) {
       console.log(error);

@@ -6,6 +6,7 @@ clubbasenr=$3
 dbname=FootCal_$4
 serverdir=$5
 apiport=$6
+modclubname=${clubname//%20/ }
 
 mkdir /app/nodeprojects/github/$serverdir
 cp -r /app/nodeprojects/github/templates/FootCalTemplate/. /app/nodeprojects/github/$serverdir
@@ -14,7 +15,7 @@ mv /app/nodeprojects/github/$serverdir/footcaltemplate.js  /app/nodeprojects/git
 chmod 646 /app/nodeprojects/github/$serverdir/footcalini.js
 #construct the ini file
 sed -i -e "s/CIstring/$clubid/g" /app/nodeprojects/github/$serverdir/footcalini.js
-sed -i -e "s/CNstring/$clubname/g" /app/nodeprojects/github/$serverdir/footcalini.js
+sed -i -e "s/CNstring/$modclubname/g" /app/nodeprojects/github/$serverdir/footcalini.js
 sed -i -e "s/CBNstring/$clubbasenr/g" /app/nodeprojects/github/$serverdir/footcalini.js
 sed -i -e "s/DNstring/$dbname/g" /app/nodeprojects/github/$serverdir/footcalini.js
 sed -i -e "s/SDstring/$serverdir/g" /app/nodeprojects/github/$serverdir/footcalini.js
