@@ -30,6 +30,17 @@ var app = express();
   app.use(bodyParser.json());
 //*************************************************************************
 
+app.all("/*", function(req, res, next){
+  console.log("all gehit !!");
+  console.log(req.originalUrl);
+  console.log(req.headers);
+
+  console.log(req.connection.remoteAddress);
+  console.log(req.socket.remoteAddress); 
+
+  next();
+
+});
 
 /*CLUBS*/
 //************************************************************************************************************************************************************************
