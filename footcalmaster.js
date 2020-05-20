@@ -94,7 +94,7 @@ connection.query(connquery, function(err, rows, fields) {
 });
 
 app.get("/clubs/nonfavorites/:favorites",function(req,res){
-var connquery ="SELECT * from clubs WHERE club_ID NOT in " + req.params.favorites + " ORDER BY club_name ASC"
+var connquery ="SELECT * from clubs WHERE active = 1 AND club_ID NOT in " + req.params.favorites + " ORDER BY club_name ASC"
 connection.query(connquery, function(err, rows, fields) {
 /*connection.end();*/
   if (!err){
